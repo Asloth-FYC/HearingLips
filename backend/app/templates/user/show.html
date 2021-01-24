@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    展示
+{% endblock %}
+
+{% block body %}
+    <p>当前注册人数为:{{ users|length }}</p>
+    <table border="1">
+    {% for user in users %}
+        <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.password }}</td>
+        <td><a href="{{ url_for('user.delete') }}?username={{ user.username }}">del</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,2 @@
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:594666@127.0.0.1:3306/flask_study'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
