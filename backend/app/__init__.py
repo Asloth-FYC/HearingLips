@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -14,6 +13,5 @@ def create_app():
     app.config.from_object(config)
     app.register_blueprint(user_bp)
     db.init_app(app)
-    migrate = Migrate(app, db)
-    CORS(app)
+    Migrate(app, db)
     return app

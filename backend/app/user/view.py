@@ -3,6 +3,6 @@ from flask import Blueprint, jsonify
 user_bp = Blueprint('user', __name__)
 
 
-@user_bp.route('/',methods=['GET','POST'])
-def index():
+@user_bp.route('/hello', methods=['GET', 'POST'])
+def hello():
     return 'welcome! Vue+Flask!'
