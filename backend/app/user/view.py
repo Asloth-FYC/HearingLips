@@ -5,4 +5,4 @@ user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/hello', methods=['GET', 'POST'])
 def hello():
-    return 'welcome! Vue+Flask!'
+    return 'hello! Vue&Flask!'
