@@ -21,7 +21,7 @@ service.interceptors.request.use(
 //响应拦截器
 service.interceptors.response.use(
     function(response){
-        console.log(config);
+        console.log(response);
         return response;
     },
     //服务器没有响应

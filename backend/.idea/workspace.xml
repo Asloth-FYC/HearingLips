@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f5d4545c-a14a-48ed-9213-974dad7dd762" name="Default Changelist" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user/view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/HelloWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/vue.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +98,8 @@
       <workItem from="1611473573152" duration="35000" />
       <workItem from="1611473624832" duration="6155000" />
       <workItem from="1611551378555" duration="6312000" />
-      <workItem from="1611575642080" duration="870000" />
+      <workItem from="1611575642080" duration="2362000" />
+      <workItem from="1611580105259" duration="244000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1611473375648</created>
