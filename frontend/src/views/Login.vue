@@ -101,6 +101,6 @@ export default {
 </script>
 
 
-<style lang="scss">
-  @import "src/assets/login-style";
+<style lang="sass" scoped>
+  @import "@/assets/styles/login-style"
 </style>
