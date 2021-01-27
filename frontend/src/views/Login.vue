@@ -5,20 +5,20 @@
         <div class="user_options-text">
           <div class="user_options-unregistered">
             <h2 class="user_unregistered-title">Don't have an account?</h2>
-            <p class="user_unregistered-text">welcome to lip reading!</p>
+            <p class="user_unregistered-text">Welcome to HearingLips!</p>
             <button  class="user_unregistered-signup" id="signup-button" @click="choose_signup">Sign up</button>
           </div>
 
           <div class="user_options-registered">
             <h2 class="user_registered-title">Have an account?</h2>
-            <p class="user_registered-text">try out now!</p>
-            <button  class="user_registered-login" id="login-button" @click="choose_login">Login</button>
+            <p class="user_registered-text">Try out now!</p>
+            <button  class="user_registered-login" id="login-button" @click="choose_login">Sign in</button>
           </div>
         </div>
 
         <div class="user_options-forms" id="user_options-forms">
           <div class="user_forms-login">
-            <h2 class="forms_title">Login</h2>
+            <h2 class="forms_title">Sign in</h2>
             <form class="forms_form">
               <fieldset class="forms_fieldset">
                 <div class="forms_field">
@@ -56,7 +56,6 @@
         </div>
       </div>
     </section>
-
   </div>
 </template>
 
@@ -67,9 +66,9 @@ export default {
   data(){
     return{
       user:{
-        name:'',
-        psw:'',
-        email:''//暂时仅支持用邮箱地址登录
+        name:String,
+        psw:String,
+        email:String//暂时仅支持用邮箱地址登录
       },
     }
   },
