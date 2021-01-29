@@ -4,10 +4,23 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'home',
+    component: () => import('../views/Home')
+  },
+  {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "hello" */ '../views/Login')
-  }
+    component: () => import('../views/Login')
+  },
+  {
+    path: '*',
+    name: '404',
+    component: () => import('../views/404'),
+    meta:{
+      title:'页面走丢了'
+    }
+  },
 ]
 
 const router = new VueRouter({

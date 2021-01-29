@@ -30,7 +30,7 @@
               </fieldset>
               <div class="forms_buttons">
                 <button type="button" class="forms_buttons-forgot">Forgot password?</button>
-              <input type="submit" value="Log In" class="forms_buttons-action">
+              <input type="submit" value="Sign In" class="forms_buttons-action">
               </div>
             </form>
           </div>
@@ -66,9 +66,9 @@ export default {
   data(){
     return{
       user:{
-        name:String,
-        psw:String,
-        email:String//暂时仅支持用邮箱地址登录
+        name:'',
+        psw:'',
+        email:''//暂时仅支持用邮箱地址登录
       },
     }
   },
