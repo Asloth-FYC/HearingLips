@@ -6,7 +6,7 @@
             </el-header>
             <el-main>
                 <Nav/>
-                <div>视频</div>
+                <div><videos/></div>
             </el-main>
             <el-footer height='40px'>
                 <Footer/>
@@ -34,9 +34,11 @@
 import Nav from '@/components/Nav'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import videos from './videos'
+
 export default {
     name :'Home',
-    components: { Nav,Header,Footer },
+    components: { Nav,Header,Footer,videos },
     data(){
         return{
             name:this.$route.params.name,
