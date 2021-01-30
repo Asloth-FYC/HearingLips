@@ -1,11 +1,14 @@
+import config
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
-import config
 from app.user.view import user_bp
 
-db = SQLAlchemy()
+
+
+from app.user.modules import User
 
 
 def create_app():
@@ -13,5 +16,5 @@ def create_app():
     app.config.from_object(config)
     app.register_blueprint(user_bp)
     db.init_app(app)
-    migrate = Migrate(app, db)
+    Migrate(app, db)
     return app

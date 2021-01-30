@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5d4545c-a14a-48ed-9213-974dad7dd762" name="Default Changelist" comment="init" />
+    <list default="true" id="f5d4545c-a14a-48ed-9213-974dad7dd762" name="Default Changelist" comment="init">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user/view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/api/helloFlask.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/Login.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,8 +47,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -95,6 +108,9 @@
       <workItem from="1611575642080" duration="2362000" />
       <workItem from="1611580105259" duration="244000" />
       <workItem from="1611717634642" duration="416000" />
+      <workItem from="1611911182004" duration="227000" />
+      <workItem from="1611911430093" duration="9926000" />
+      <workItem from="1611966915664" duration="3925000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1611473375648</created>
