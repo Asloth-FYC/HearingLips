@@ -6,7 +6,9 @@
             </el-header>
             <el-main>
                 <Nav/>
-                <div><videos/></div>
+                <div class="card-list">
+                    <videoCard  v-for="index of 5" :key="index"/>
+                </div>
             </el-main>
             <el-footer height='40px'>
                 <Footer/>
@@ -21,12 +23,15 @@
     color: #333;
     line-height: 30px;
   }
-  
+
   .el-main {
     background-color: #ffffff;
     color: #333;
-    text-align: center;
-    line-height: 550px;
+    width: 76%;
+    margin: auto;
+  }
+  .card-list{
+      margin-top: 50px;
   }
 </style>
 
@@ -34,11 +39,12 @@
 import Nav from '@/components/Nav'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import videos from './videos'
+import videoCard from '@/components/videoCard'
+import Videos from './videos.vue'
 
 export default {
     name :'Home',
-    components: { Nav,Header,Footer,videos },
+    components: { Nav,Header,Footer,Videos,videoCard },
     data(){
         return{
             name:this.$route.params.name,
