@@ -8,9 +8,9 @@
             <el-button icon="el-icon-user" circle></el-button>
             <el-dropdown-menu slot="dropdown">
                 <router-link to="/profile/index">
-                <el-dropdown-item >
+                <el-dropdown-item v-if="signed">
                     <span>Signed in as</span>
-                    <strong style="display:block;">{{this.username}}<i class="el-icon-edit"></i></strong>
+                    <strong style="display:block;">{{this.$cookies.get('user')}}<i class="el-icon-edit"></i></strong>
                 </el-dropdown-item>
                 </router-link>
             <router-link to="/">
@@ -20,7 +20,7 @@
                 <el-dropdown-item>Github</el-dropdown-item>
             </a>
             <el-dropdown-item divided @click.native="logout">
-                <span style="display:block;">退出登录</span>
+                <span style="display:block;"><span v-if="signed">退出</span>登录</span>
             </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
@@ -45,10 +45,13 @@ a {
 export default {
     name:'Header',
     props:{
-        username:String
+        signed:Boolean
     },
     methods:{
         logout() {
+            if(this.signed){
+                this.$cookies.remove('user')
+            }
             this.$router.push({name:'login'})
         }
     },

@@ -2,7 +2,7 @@
     <div>
         <el-container>
             <el-header height='40px'>
-                <Header :username="this.name"/>
+                <Header :signed="this.signed"/>
             </el-header>
             <el-main>
                 <Nav/>
@@ -45,12 +45,19 @@ import Videos from './videos.vue'
 export default {
     name :'Home',
     components: { Nav,Header,Footer,Videos,videoCard },
+
     data(){
         return{
-            name:this.$route.params.name,
+            signed:false,
             video:{}
         }
     },
+    created(){
+        let token = this.$cookies.get('user');
+        if(token){
+            this.signed = true;
+        }
+    }
 }
 
 </script>
