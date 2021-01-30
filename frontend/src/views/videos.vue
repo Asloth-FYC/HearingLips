@@ -134,6 +134,7 @@ methods:{//跳转到当前video播放界面
   border-radius: 4px 4px 0 0;
 }
 .video {
+
   overflow: hidden;
   box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -191,9 +192,14 @@ methods:{//跳转到当前video播放界面
   float: right
 }
 .image {
-  width: 100%;
+
   display: block;
 }
-.vibutton{float: right
+.vibutton{
+  float: right
+}
+.el-card{
+    width: 200px;
+  height: 100px;
 }
 </style>
