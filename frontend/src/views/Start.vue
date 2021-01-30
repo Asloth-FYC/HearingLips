@@ -83,10 +83,9 @@
 </style>
 <script>
 import Header from '../components/Header.vue'
-import Uploader from '../components/Uploader.vue'
 export default {
     name:'Start',
-    components: { Uploader , Header},
+    components: {Header},
     data() {
       return {
         labelPosition: 'top',
