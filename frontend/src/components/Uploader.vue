@@ -12,7 +12,7 @@
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
     </el-upload>
-    <el-button class="submit" size="small"  @click="submitUpload">submit   </el-button>
+    <el-button class="submit" size="small"  @click="submitUpload">submit </el-button>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   data(){
     return{
       fileList:[],
-      filename:''
+      filename:'',
     }
   },
   methods:{
@@ -36,17 +36,17 @@ export default {
 
 <style scoped>
 .uploadBox{
-  width: auto;
-  height: auto;
-  padding-left: 2%;
-  padding-right: 2%;
-  padding-top: 4%;
-  padding-bottom: 4%;
+  /*width: auto;*/
+  /*height: auto;*/
+  /*padding-left: 1%;*/
+  /*padding-right: 1%;*/
+  /*padding-top: 2%;*/
+  padding-bottom: 3px;
   background-color: white;
 
-  position: fixed;
-  top:20%;
-  left: 30%;
+  /*position: fixed;*/
+  /*top:20%;*/
+  /*left: 30%;*/
 
   border-color: #393939;
   border-style: dashed;
@@ -57,15 +57,16 @@ export default {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-items: center;
   align-items: center;
 }
 .upload-demo{
-  align-self: center;
+  flex:none;
+  margin:0px;
 }
 .submit{
-  margin-top: 5%;
-  width:20%;
+  margin:0px;
+  /*width:20%;*/
   font-size: 16px;
 }
 .submit:hover {
