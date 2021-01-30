@@ -6,7 +6,7 @@
         <el-menu-item index="3">字幕</el-menu-item>
         <el-menu-item index="4">文档</el-menu-item>
         <el-menu-item index="5" id="btn" >
-            <el-button type="primary" plain icon="el-icon-plus">新建项目</el-button>
+            <el-button type="primary" plain icon="el-icon-plus" @click="start">新建项目</el-button>
         </el-menu-item>
     </el-menu>
 </div>
@@ -35,6 +35,9 @@ export default {
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+      start(){
+        this.$router.push({name:'videoTrans'})
       }
     }
   }
