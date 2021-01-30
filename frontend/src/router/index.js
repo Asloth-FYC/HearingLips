@@ -14,6 +14,11 @@ const routes = [
     component: () => import('../views/Login')
   },
   {
+    path:'/videoTrans',
+    name:'videoTrans',
+    component: () => import('../views/Start')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/404'),

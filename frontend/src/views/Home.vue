@@ -2,7 +2,7 @@
     <div>
         <el-container>
             <el-header height='40px'>
-                <Header/>
+                <Header :username="this.name"/>
             </el-header>
             <el-main>
                 <Nav/>
@@ -31,14 +31,18 @@
 </style>
 
 <script>
-import Uploader from '@/components/Uploader'
 import Nav from '@/components/Nav'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 export default {
     name :'Home',
-    components: { Uploader,Nav,Header,Footer },
-
-        Nav}
+    components: { Nav,Header,Footer },
+    data(){
+        return{
+            name:this.$route.params.name,
+            video:{}
+        }
+    },
+}
 
 </script>

@@ -8,10 +8,13 @@
             <el-button icon="el-icon-user" circle></el-button>
             <el-dropdown-menu slot="dropdown">
                 <router-link to="/profile/index">
-                <el-dropdown-item>账号管理</el-dropdown-item>
+                <el-dropdown-item >
+                    <span>Signed in as</span>
+                    <strong style="display:block;">{{this.username}}<i class="el-icon-edit"></i></strong>
+                </el-dropdown-item>
                 </router-link>
             <router-link to="/">
-                <el-dropdown-item>项目介绍</el-dropdown-item>
+                <el-dropdown-item divided>项目介绍</el-dropdown-item>
             </router-link>
             <a target="_blank" href="https://github.com/Asloth-FYC/HearingLips">
                 <el-dropdown-item>Github</el-dropdown-item>
@@ -41,10 +44,13 @@ a {
 <script>
 export default {
     name:'Header',
+    props:{
+        username:String
+    },
     methods:{
         logout() {
             this.$router.push({name:'login'})
         }
-    }
+    },
 }
 </script>

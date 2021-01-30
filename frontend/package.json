@@ -7,9 +7,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.0.0-rc.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.0",
+    "js-md5": "^0.7.3",
     "node-sass": "^5.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
