@@ -2,7 +2,7 @@
     <div>
         <el-container>
             <el-header height='40px'>
-                <Header :username="this.name"/>
+                <Header :signed="this.signed"/>
             </el-header>
             <el-main>
                 <Nav/>
@@ -35,19 +35,27 @@
 </style>
 
 <script>
-    import Nav from '@/components/Nav'
-    import Header from '@/components/Header'
-    import Footer from '@/components/Footer'
-    import videoCard from '@/components/videoCard'
-    import Videos from './videos.vue'
-    export default {
-        name :'Home',
-        components: { Nav,Header,Footer,Videos,videoCard },
-        data(){
-            return{
-                name:this.$route.params.name,
-                video:{}
-            }
-        },
+import Nav from '@/components/Nav'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import videoCard from '@/components/videoCard'
+
+export default {
+    name :'Home',
+    components: { Nav,Header,Footer,videoCard },
+
+    data(){
+        return{
+            signed:false,
+            video:{}
+        }
+    },
+    created(){
+        let token = this.$cookies.get('user');
+        if(token){
+            this.signed = true;
+        }
     }
+}
+
 </script>

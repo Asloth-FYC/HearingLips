@@ -14,9 +14,19 @@ const routes = [
     component: () => import('../views/Login')
   },
   {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/profile')
+  },
+  {
     path:'/videoTrans',
     name:'videoTrans',
     component: () => import('../views/Start')
+  },
+  {
+    path:'/play',
+    name:'play',
+    component: () => import('../views/play')
   },
   {
     path: '*',
@@ -26,11 +36,7 @@ const routes = [
       title:'页面走丢了'
     }
   },
-  {
-    path:'/play',
-    name:'play',
-    component: () => import('../views/play')
-  },
+
 ]
 
 const router = new VueRouter({

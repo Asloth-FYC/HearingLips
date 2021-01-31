@@ -94,7 +94,8 @@ export default {
           message: 'Welcome!  '+data.name,
           type: 'success'
           });
-          this.$router.push({name:'home',params:{name:data.name}})
+          this.$router.push({name:'home',params:{name:data.name}});
+          this.$cookies.set('user',data.name);
         }else{
           this.$notify({
           title: '错误',
