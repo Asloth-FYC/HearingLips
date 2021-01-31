@@ -26,6 +26,11 @@ const routes = [
       title:'页面走丢了'
     }
   },
+  {
+    path:'/play',
+    name:'play',
+    component: () => import('../views/play')
+  },
 ]
 
 const router = new VueRouter({

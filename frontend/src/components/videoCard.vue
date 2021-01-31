@@ -4,7 +4,7 @@
             <span><i class="el-icon-video-camera"></i></span> 
             <div class="title">xxx</div>
         </div>
-        <div class="image-wrapper">
+        <div class="image-wrapper" @click="isclick">
             <img src="?imageView&amp;thumbnail=210y110"> 
             <span class="duration">00:03</span> 
         </div>
@@ -16,8 +16,16 @@
         </div>
     </el-card>
 </template>
-
-<style scoped>
+<script>
+    export default {
+        methods:{
+            isclick(){
+                this.$router.push({name:'play'})
+            }
+        }
+    }
+</script>
+<style scoped lang="scss">
 .card{
     display: inline-block;
     width: 240px;
@@ -26,6 +34,12 @@
     padding-right: 10px;
     background: #fff;
     border-radius: 2px;
+    &:hover .duration {
+     opacity: 0;
+ }
+    &:hover .remove {
+        opacity: 100;
+    }
 
 }
 .card .image-wrapper img{
@@ -88,5 +102,10 @@
     position: absolute;
     top: 10px;
     right: 0;
+    opacity: 0;
 }
+    .duration{
+        transition: .3s ease-in;
+
+    }
 </style>
