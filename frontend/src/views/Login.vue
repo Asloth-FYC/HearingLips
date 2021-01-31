@@ -34,19 +34,22 @@
           </div>
           <div class="user_forms-signup">
             <h2 class="forms_title">Sign Up</h2>
-              <fieldset class="forms_fieldset">
-                <div class="forms_field">
+              <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="forms_fieldset">
+                <el-form-item class="forms_field">
                   <input type="text" v-model="postParams.name" placeholder="Full Name" class="forms_field-input" required />
-                </div>
-                <div class="forms_field">
+                </el-form-item>
+                <el-form-item class="forms_field">
                   <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required />
-                </div>
-                <div class="forms_field">
-                  <input type="password" v-model="psw" placeholder="Password" class="forms_field-input" required />
-                </div>
-              </fieldset>
+                </el-form-item>
+                <el-form-item class="forms_field" prop="psw">
+                  <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />
+                </el-form-item>
+                <el-form-item class="forms_field" prop="psw_check">
+                  <input type="password" v-model="ruleForm.psw_check" placeholder="check Password" class="forms_field-input" required />
+                </el-form-item>
+              </el-form>
               <div class="forms_buttons">
-                <button class="forms_buttons-action" @click="sign_up">Sign up</button>
+                <button class="forms_buttons-action" @click="sign_up('ruleForm')">Sign up</button>
               </div>
           </div>
         </div>
@@ -63,14 +66,44 @@ import md5 from 'js-md5'
 export default {
   name: 'login',
   data(){
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else {
+        if (this.ruleForm.psw_check !== '') {
+          this.$refs.ruleForm.validateField('psw_check');
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.ruleForm.psw) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
     return{
       postParams:{
         name:'',
         email:'',
         psw_md5:''
       },
-      psw:'',
-    }
+      ruleForm:{
+        psw:'',
+        psw_check:''
+      },
+      rules: {
+        psw: [
+          { validator: validatePass, trigger: 'blur' }
+        ],
+        psw_check: [
+          { validator: validatePass2, trigger: 'blur' }
+        ]
+      }
+    };
   },
   methods:{
     choose_signup(){
@@ -90,40 +123,47 @@ export default {
         let data = resp.data;
         if(data.code==200){
           this.$notify({
-          title: data.msg,
-          message: 'Welcome!  '+data.name,
-          type: 'success'
+            title: data.msg,
+            message: 'Welcome!  '+data.name,
+            type: 'success'
           });
           this.$router.push({name:'home',params:{name:data.name}});
           this.$cookies.set('user',data.name);
         }else{
           this.$notify({
-          title: '错误',
-          message: data.msg,
-          type: 'error'
+            title: '错误',
+            message: data.msg,
+            type: 'error'
           });
         }
       })
     },
     
-    sign_up(){
-      this.postParams.psw_md5 = md5(this.psw)
-      register(this.postParams).then(resp => {
-        let data = resp.data;
-        if(data.code==200){
-          this.$notify({
-          title: data.msg,
-          type: 'success'
-          });
-          this.$router.go(0);
-        }else{
-          this.$notify({
-          title: '错误',
-          message: data.msg,
-          type: 'error'
-          });
+    sign_up(formName){
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.postParams.psw_md5 = md5(this.psw)
+          register(this.postParams).then(resp => {
+            let data = resp.data;
+            if(data.code==200){
+              this.$notify({
+                title: data.msg,
+                type: 'success'
+              });
+              this.$router.go(0);
+            }else{
+              this.$notify({
+                title: '错误',
+                message: data.msg,
+                type: 'error'
+              });
+            }
+          })
+        } else {
+          console.log('error submit!!');
+          return false;
         }
-      })
+      });
     }
   },
 }
