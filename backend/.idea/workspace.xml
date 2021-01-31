@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f5d4545c-a14a-48ed-9213-974dad7dd762" name="Default Changelist" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Nav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Nav.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/404.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +108,9 @@
       <workItem from="1611717634642" duration="416000" />
       <workItem from="1611911182004" duration="227000" />
       <workItem from="1611911430093" duration="9926000" />
-      <workItem from="1611966915664" duration="8257000" />
+      <workItem from="1611966915664" duration="8597000" />
+      <workItem from="1612011471803" duration="637000" />
+      <workItem from="1612012698760" duration="610000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1611473375648</created>

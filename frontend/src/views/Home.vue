@@ -18,21 +18,20 @@
 </template>
 
 <style scoped>
-.el-header, .el-footer {
-    background-color: #ffffff;
-    color: #333;
-    line-height: 30px;
-  }
-
-  .el-main {
-    background-color: #ffffff;
-    color: #333;
-    width: 76%;
-    margin: auto;
-  }
-  .card-list{
-      margin-top: 50px;
-  }
+    .el-header, .el-footer {
+        background-color: #ffffff;
+        color: #333;
+        line-height: 30px;
+    }
+    .el-main {
+        background-color: #ffffff;
+        color: #333;
+        width: 76%;
+        margin: auto;
+    }
+    .card-list{
+        margin-top: 50px;
+    }
 </style>
 
 <script>
@@ -40,11 +39,10 @@ import Nav from '@/components/Nav'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import videoCard from '@/components/videoCard'
-import Videos from './videos.vue'
 
 export default {
     name :'Home',
-    components: { Nav,Header,Footer,Videos,videoCard },
+    components: { Nav,Header,Footer,videoCard },
 
     data(){
         return{

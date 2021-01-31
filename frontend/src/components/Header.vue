@@ -7,7 +7,7 @@
         <el-dropdown>
             <el-button icon="el-icon-user" circle></el-button>
             <el-dropdown-menu slot="dropdown">
-                <router-link to="/profile/index">
+                <router-link to="/profile">
                 <el-dropdown-item v-if="signed">
                     <span>Signed in as</span>
                     <strong style="display:block;">{{this.$cookies.get('user')}}<i class="el-icon-edit"></i></strong>
