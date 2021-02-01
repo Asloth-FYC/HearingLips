@@ -24,7 +24,7 @@
                   <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required autofocus />
                 </div>
                 <div class="forms_field">
-                  <input type="password" v-model="psw" placeholder="Password" class="forms_field-input" required />
+                  <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />
                 </div>
               </fieldset>
               <div class="forms_buttons">
@@ -36,7 +36,7 @@
             <h2 class="forms_title">Sign Up</h2>
               <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="forms_fieldset">
                 <el-form-item class="forms_field">
-                  <input type="text" v-model="postParams.name" placeholder="Full Name" class="forms_field-input" required />
+                  <input type="text" v-model="postParams.name" placeholder="Username" class="forms_field-input" required />
                 </el-form-item>
                 <el-form-item class="forms_field">
                   <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required />
@@ -45,7 +45,7 @@
                   <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />
                 </el-form-item>
                 <el-form-item class="forms_field" prop="psw_check">
-                  <input type="password" v-model="ruleForm.psw_check" placeholder="check Password" class="forms_field-input" required />
+                  <input type="password" v-model="ruleForm.psw_check" placeholder="Check Password" class="forms_field-input" required />
                 </el-form-item>
               </el-form>
               <div class="forms_buttons">
