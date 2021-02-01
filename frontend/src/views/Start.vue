@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <div class="step">
-            <el-steps :active="1" finish-status="success" simple style="margin-top: 20px">
+            <el-steps :active="0" finish-status="success" simple style="margin-top: 20px">
                 <el-step title="提交视频" ></el-step>
                 <el-step title="等待机翻" ></el-step>
                 <el-step title="查看结果" ></el-step>
@@ -96,7 +96,7 @@ export default {
         fileList:[],
         rules: {
           name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { required: true, message: '请输入项目名称', trigger: 'blur' },
           ],
           type: [
             { required: true, message: '请选择翻译类型', trigger: 'change' }
