@@ -21,7 +21,7 @@ def register():
         user.password = psw
         db.session.add(user)
         db.session.commit()
-        return jsonify(code=200, msg='注册成功！')
+        return jsonify(code=200, msg='欢迎加入HearingLips！')
 
 
 @user_bp.route('/login', methods=['POST'])
