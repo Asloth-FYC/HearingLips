@@ -41,7 +41,7 @@
                 <el-form-item class="forms_field">
                   <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required />
                 </el-form-item>
-                <el-form-item class="forms_field" prop="psw">
+                <el-form-item class="forms_field">
                   <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />
                 </el-form-item>
                 <el-form-item class="forms_field" prop="psw_check">
@@ -118,16 +118,17 @@ export default {
       userForms.classList.add('bounceRight')
     },
     sign_in(){
-      this.postParams.psw_md5 = md5(this.psw)
+      this.postParams.psw_md5 = md5(this.ruleForm.psw)
+      console.log(this.postParams.psw_md5);
       login(this.postParams).then(resp => {
         let data = resp.data;
         if(data.code==200){
+          this.$router.push({name:'home',params:{name:data.name}});
           this.$notify({
             title: data.msg,
             message: 'Welcome!  '+data.name,
             type: 'success'
           });
-          this.$router.push({name:'home',params:{name:data.name}});
           this.$cookies.set('user',data.name);
         }else{
           this.$notify({
@@ -142,15 +143,16 @@ export default {
     sign_up(formName){
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.postParams.psw_md5 = md5(this.psw)
+          this.postParams.psw_md5 = md5(this.ruleForm.psw)
           register(this.postParams).then(resp => {
             let data = resp.data;
             if(data.code==200){
               this.$notify({
-                title: data.msg,
+                title: '注册成功',
+                message: data.msg,
                 type: 'success'
               });
-              this.$router.go(0);
+              this.choose_login()
             }else{
               this.$notify({
                 title: '错误',
