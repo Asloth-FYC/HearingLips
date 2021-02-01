@@ -1,9 +1,6 @@
-import json
-
-from flask import Blueprint, request, jsonify
-
-from app import db
-from app.user.modules import User
+from flask import Blueprint, request, jsonify, json
+from app.extensions import db
+from app.models import User
 
 user_bp = Blueprint('user', __name__)
 
