@@ -13,11 +13,11 @@
 
 
         <div class="form">
-            <el-form :label-position="labelPosition" :model="formLabelAlign">
-                <el-form-item label="项目名称">
+            <el-form :label-position="labelPosition" :model="formLabelAlign" :rules="rules" ref="ruleForm">
+                <el-form-item label="项目名称" prop="name">
                     <el-input v-model="formLabelAlign.name" maxlength="10" show-word-limit></el-input>
                 </el-form-item>
-                <el-form-item label="翻译类型">
+                <el-form-item label="翻译类型" prop="type">
                     <el-select v-model="formLabelAlign.type" placeholder="请选择翻译类型">
                         <el-option label="唇语识别" value="1"></el-option>
                         <el-option label="语音翻译" value="2"></el-option>
@@ -36,7 +36,7 @@
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                 </el-upload>
-                <el-button class="submit" type="primary" plain icon="el-icon-check" circle @click="submitUpload"></el-button>
+                <el-button class="submit" type="primary" plain icon="el-icon-check" circle @click="submitUpload('ruleForm')"></el-button>
                 </div>
             </el-form>
         </div>
@@ -94,11 +94,26 @@ export default {
           type: ''
         },
         fileList:[],
+        rules: {
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+          ],
+          type: [
+            { required: true, message: '请选择翻译类型', trigger: 'change' }
+          ],
+        }
       };
     },
     methods: {
-        submitUpload: function () {
-        this.$refs.upload.submit()
+        submitUpload: function (formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              this.$refs.upload.submit()
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
         },
     }
 }
