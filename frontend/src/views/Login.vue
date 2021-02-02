@@ -28,7 +28,7 @@
                 </div>
               </fieldset>
               <div class="forms_buttons">
-                <button type="button" class="forms_buttons-forgot">Forgot password?</button>
+                <button type="button" class="forms_buttons-forgot" @click="forgetpsw">Forgot password?</button>
               <button class="forms_buttons-action" @click="sign_in">Sign In</button>
               </div>
           </div>
@@ -41,7 +41,7 @@
                 <el-form-item class="forms_field">
                   <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required />
                 </el-form-item>
-                <el-form-item class="forms_field">
+                <el-form-item class="forms_field" prop="psw">
                   <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />
                 </el-form-item>
                 <el-form-item class="forms_field" prop="psw_check">
@@ -55,6 +55,7 @@
         </div>
       </div>
     </section>
+    <forgetpswDialog ref="forgetPasswordDialog"></forgetpswDialog>
   </div>
 </template>
 
@@ -62,9 +63,13 @@
 import {login} from '@/api/user'
 import {register} from '@/api/user'
 import md5 from 'js-md5'
+import forgetpswDialog from "@/components/forgetpswDialog";
 
 export default {
   name: 'login',
+  components:{
+    forgetpswDialog
+  },
   data(){
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -139,7 +144,6 @@ export default {
         }
       })
     },
-    
     sign_up(formName){
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -166,6 +170,9 @@ export default {
           return false;
         }
       });
+    },
+    forgetpsw(){
+      this.$refs.forgetPasswordDialog.onShow();
     }
   },
 }
