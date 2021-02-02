@@ -41,7 +41,7 @@
                 <el-form-item class="forms_field">
                   <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required />
                 </el-form-item>
-                <el-form-item class="forms_field">
+                <el-form-item class="forms_field" prop="psw">
                   <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />
                 </el-form-item>
                 <el-form-item class="forms_field" prop="psw_check">

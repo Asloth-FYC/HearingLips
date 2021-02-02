@@ -13,12 +13,12 @@
 
 
         <div class="form">
-            <el-form :label-position="labelPosition" :model="formLabelAlign" :rules="rules" ref="ruleForm">
+            <el-form label-position="top" :model="postPrams" :rules="rules" ref="ruleForm">
                 <el-form-item label="项目名称" prop="name">
-                    <el-input v-model="formLabelAlign.name" maxlength="10" show-word-limit></el-input>
+                    <el-input v-model="postPrams.name" maxlength="10" show-word-limit></el-input>
                 </el-form-item>
                 <el-form-item label="翻译类型" prop="type">
-                    <el-select v-model="formLabelAlign.type" placeholder="请选择翻译类型">
+                    <el-select v-model="postPrams.type" placeholder="请选择翻译类型">
                         <el-option label="唇语识别" value="1"></el-option>
                         <el-option label="语音翻译" value="2"></el-option>
                     </el-select>
@@ -28,10 +28,11 @@
                     class="upload-demo"
                     ref="upload"
                     drag
+                    :data="postPrams"
                     :auto-upload="false"
                     list-type="picture"
                     :file-list="fileList"
-                    action="https://jsonplaceholder.typicode.com/posts/"
+                    action="http://localhost:5000/upload"
                     multiple>
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -88,8 +89,7 @@ export default {
     components: {Header},
     data() {
       return {
-        labelPosition: 'top',
-        formLabelAlign: {
+        postPrams:{
           name: '',
           type: ''
         },
