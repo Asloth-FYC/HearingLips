@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import dialogmixin from "./dialogMixin";
+    import dialogmixin from "../assets/js/dialogMixin";
     import { apiAdminForgetMail, apiAdminForgetPassword} from "../api/admin";
     import md5 from 'js-md5'
 
