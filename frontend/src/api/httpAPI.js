@@ -10,7 +10,9 @@ const service = axios.create({
 //请求拦截器
 service.interceptors.request.use(
     function(config){
-        console.log(config);
+        if(localStorage.getItem('Authorization')){
+            config.headers.token = localStorage.getItem('Authorization');
+        }
         return config;
     },
     function(error){

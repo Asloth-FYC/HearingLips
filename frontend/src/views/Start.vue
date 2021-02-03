@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <div class="step">
-            <el-steps :active="0" finish-status="success" simple style="margin-top: 20px">
+            <el-steps :active="activeStep" finish-status="success" simple style="margin-top: 20px">
                 <el-step title="提交视频" ></el-step>
                 <el-step title="等待机翻" ></el-step>
                 <el-step title="查看结果" ></el-step>
@@ -33,6 +33,8 @@
                     list-type="picture"
                     :file-list="fileList"
                     action="http://localhost:5000/upload"
+                    :on-success="handleSuccess"
+                    :on-error="handleError"
                     multiple>
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -94,6 +96,7 @@ export default {
           type: ''
         },
         fileList:[],
+        activeStep:0,
         rules: {
           name: [
             { required: true, message: '请输入项目名称', trigger: 'blur' },
@@ -115,6 +118,21 @@ export default {
             }
           });
         },
+        handleSuccess(){
+          this.$notify({
+            title: '文件上传成功',
+            type: 'success'
+          });
+          this.activeStep = 1;
+          console.log(this.fileList);
+        },
+        handleError(){
+          this.$notify({
+            title: '错误',
+            message:'文件上传失败，请稍后再试',
+            type: 'error'
+          });
+        }
     }
 }
 

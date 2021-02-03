@@ -21,3 +21,10 @@ export function apiAdminForgetPassword(data){
         }
     })
 }
+
+export function get(){
+    return service.request({
+        method:'post',
+        url:'/get',
+    })
+}

@@ -2,7 +2,7 @@
     <div>
         <el-container>
             <el-header height='40px'>
-                <Header :signed="this.signed"/>
+                <Header :signed='signed' :username='username'/>
             </el-header>
             <el-main>
                 <Nav/>
@@ -39,22 +39,35 @@ import Nav from '@/components/Nav'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import videoCard from '@/components/videoCard'
+import { get } from '../api/admin'
 
 export default {
     name :'Home',
     components: { Nav,Header,Footer,videoCard },
-
     data(){
         return{
             signed:false,
-            video:{}
+            username:''
         }
     },
     created(){
-        let token = this.$cookies.get('user');
-        if(token){
-            this.signed = true;
-        }
+        //验证当前的token是否过期
+        get().then(resp=>{
+            let data = resp.data;
+            if(data.code===200){
+                this.signed = true;
+                this.username=data.data.username;
+            }else{
+                this.$notify({
+                    title: '错误',
+                    message: data.msg,
+                    type: 'warning'
+                });
+                this.$router.push('/login');
+            }
+        })
+
+
     }
 }
 

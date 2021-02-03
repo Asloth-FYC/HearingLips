@@ -10,7 +10,7 @@
                 <router-link to="/profile">
                 <el-dropdown-item v-if="signed">
                     <span>Signed in as</span>
-                    <strong style="display:block;">{{this.$cookies.get('user')}}<i class="el-icon-edit"></i></strong>
+                    <strong style="display:block;">{{this.username}}<i class="el-icon-edit"></i></strong>
                 </el-dropdown-item>
                 </router-link>
             <router-link to="/">
@@ -42,18 +42,23 @@ a {
 </style>
 
 <script>
+
+
 export default {
     name:'Header',
     props:{
-        signed:Boolean
+        signed:Boolean,
+        username:String
     },
     methods:{
         logout() {
             if(this.signed){
-                this.$cookies.remove('user')
+                localStorage.removeItem('Authorization');
             }
             this.$router.push({name:'login'})
         }
     },
+
+
 }
 </script>

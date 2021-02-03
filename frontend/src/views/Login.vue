@@ -60,8 +60,7 @@
 </template>
 
 <script>
-import {login} from '@/api/user'
-import {register} from '@/api/user'
+import {login,register} from '@/api/user'
 import md5 from 'js-md5'
 import forgetpswDialog from "@/components/forgetpswDialog";
 
@@ -124,17 +123,16 @@ export default {
     },
     sign_in(){
       this.postParams.psw_md5 = md5(this.ruleForm.psw)
-      console.log(this.postParams.psw_md5);
       login(this.postParams).then(resp => {
         let data = resp.data;
         if(data.code==200){
-          this.$router.push({name:'home',params:{name:data.name}});
           this.$notify({
             title: data.msg,
             message: 'Welcome!  '+data.name,
             type: 'success'
           });
-          this.$cookies.set('user',data.name);
+          localStorage.setItem('Authorization',data.token);
+          this.$router.push({name:'home',params:{id:data.id}});
         }else{
           this.$notify({
             title: '错误',
