@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, json
 from app.extensions import db
 from app.models import User
+from app.utils import generate_auth_token, verify_auth_token, class_to_dict
 
 user_bp = Blueprint('user', __name__)
 
@@ -30,8 +31,24 @@ def login():
     email = post_data['email']
     psw = post_data['psw']
     user = User.query.filter(User.email == email).first()
+
     if user:
         if user.password == psw:
-            return jsonify(code=200, name=user.username, msg='登录成功！')
+            return jsonify(code=200, name=user.username, id=user.id, token=generate_auth_token(user.id), msg='登录成功！')
 
     return jsonify(code=400, msg='用户名或密码错误！')
+
+
+@user_bp.route('/get', methods=['POST'])
+def get():
+    token = request.headers.get('token')
+    data = verify_auth_token(token)
+    if data is None:
+        return jsonify(code=401, msg='登录过期，请重新登录！')
+    user_id = data['user_code']
+    user = User.query.get(user_id)
+    projects = user.projects
+    return jsonify(code=200,
+                   usermsg={'username':user.username},
+                   projects=class_to_dict(projects),
+                   msg='验证通过')

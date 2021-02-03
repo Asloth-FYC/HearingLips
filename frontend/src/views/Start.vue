@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <div class="step">
-            <el-steps :active="0" finish-status="success" simple style="margin-top: 20px">
+            <el-steps :active="activeStep" finish-status="success" simple style="margin-top: 20px">
                 <el-step title="提交视频" ></el-step>
                 <el-step title="等待机翻" ></el-step>
                 <el-step title="查看结果" ></el-step>
@@ -13,12 +13,12 @@
 
 
         <div class="form">
-            <el-form :label-position="labelPosition" :model="formLabelAlign" :rules="rules" ref="ruleForm">
+            <el-form label-position="top" :model="postPrams" :rules="rules" ref="ruleForm">
                 <el-form-item label="项目名称" prop="name">
-                    <el-input v-model="formLabelAlign.name" maxlength="10" show-word-limit></el-input>
+                    <el-input v-model="postPrams.name" maxlength="10" show-word-limit></el-input>
                 </el-form-item>
                 <el-form-item label="翻译类型" prop="type">
-                    <el-select v-model="formLabelAlign.type" placeholder="请选择翻译类型">
+                    <el-select v-model="postPrams.type" placeholder="请选择翻译类型">
                         <el-option label="唇语识别" value="1"></el-option>
                         <el-option label="语音翻译" value="2"></el-option>
                     </el-select>
@@ -28,15 +28,18 @@
                     class="upload-demo"
                     ref="upload"
                     drag
+                    :data="postPrams"
                     :auto-upload="false"
                     list-type="picture"
                     :file-list="fileList"
-                    action="https://jsonplaceholder.typicode.com/posts/"
+                    action="http://localhost:5000/upload"
+                    :on-success="handleSuccess"
+                    :on-error="handleError"
                     multiple>
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                 </el-upload>
-                <el-button class="submit" type="primary" plain icon="el-icon-check" circle @click="submitUpload('ruleForm')"></el-button>
+                <el-button class="submit" type="primary" plain icon="el-icon-check" @click="submitUpload('ruleForm')"></el-button>
                 </div>
             </el-form>
         </div>
@@ -88,12 +91,13 @@ export default {
     components: {Header},
     data() {
       return {
-        labelPosition: 'top',
-        formLabelAlign: {
+        postPrams:{
           name: '',
-          type: ''
+          type: '',
+          token:localStorage.getItem('Authorization')
         },
         fileList:[],
+        activeStep:0,
         rules: {
           name: [
             { required: true, message: '请输入项目名称', trigger: 'blur' },
@@ -115,6 +119,21 @@ export default {
             }
           });
         },
+        handleSuccess(){
+          this.$notify({
+            title: '文件上传成功',
+            type: 'success'
+          });
+          this.activeStep = 1;
+          console.log(this.fileList);
+        },
+        handleError(){
+          this.$notify({
+            title: '错误',
+            message:'文件上传失败，请稍后再试',
+            type: 'error'
+          });
+        }
     }
 }
 

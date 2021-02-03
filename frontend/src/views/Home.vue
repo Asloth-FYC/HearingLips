@@ -2,12 +2,15 @@
     <div>
         <el-container>
             <el-header height='40px'>
-                <Header :signed="this.signed"/>
+                <Header :signed='signed' :username='username'/>
             </el-header>
             <el-main>
                 <Nav/>
                 <div class="card-list">
-                    <videoCard  v-for="index of 5" :key="index"/>
+                    <videoCard  v-for="(file,index) in projects" :key="index"
+                    :project_name="file.name"
+                    :create_at="file.create_at"
+                    :url="file.url"/>
                 </div>
             </el-main>
             <el-footer height='40px'>
@@ -39,22 +42,37 @@ import Nav from '@/components/Nav'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import videoCard from '@/components/videoCard'
+import { get } from '../api/admin'
 
 export default {
     name :'Home',
     components: { Nav,Header,Footer,videoCard },
-
     data(){
         return{
             signed:false,
-            video:{}
+            username:'',
+            projects:[]
         }
     },
     created(){
-        let token = this.$cookies.get('user');
-        if(token){
-            this.signed = true;
-        }
+        //验证当前的token是否过期
+        get().then(resp=>{
+            let data = resp.data;
+            if(data.code===200){
+                this.signed = true;
+                this.username=data.usermsg.username;
+                this.projects = data.projects
+            }else{
+                this.$notify({
+                    title: '错误',
+                    message: data.msg,
+                    type: 'warning'
+                });
+                this.$router.push('/login');
+            }
+        })
+
+
     }
 }
 
