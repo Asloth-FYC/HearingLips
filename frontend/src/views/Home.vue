@@ -7,7 +7,10 @@
             <el-main>
                 <Nav/>
                 <div class="card-list">
-                    <videoCard  v-for="index of 5" :key="index"/>
+                    <videoCard  v-for="(file,index) in projects" :key="index"
+                    :project_name="file.name"
+                    :create_at="file.create_at"
+                    :url="file.url"/>
                 </div>
             </el-main>
             <el-footer height='40px'>
@@ -47,7 +50,8 @@ export default {
     data(){
         return{
             signed:false,
-            username:''
+            username:'',
+            projects:[]
         }
     },
     created(){
@@ -56,7 +60,8 @@ export default {
             let data = resp.data;
             if(data.code===200){
                 this.signed = true;
-                this.username=data.data.username;
+                this.username=data.usermsg.username;
+                this.projects = data.projects
             }else{
                 this.$notify({
                     title: '错误',

@@ -1,7 +1,4 @@
-import functools
 import os
-
-from flask import request, jsonify
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature, SignatureExpired
 
@@ -27,4 +24,17 @@ def verify_auth_token(token):
     # token错误
     except BadSignature:
         return None
+
+
+# 对象转json
+def class_to_dict(obj):
+    obj_arr = []
+    for o in obj:
+        dict = {}
+        a = o.__dict__
+        if "_sa_instance_state" in a:
+            del a['_sa_instance_state']
+        dict.update(a)
+        obj_arr.append(dict)
+    return obj_arr
 

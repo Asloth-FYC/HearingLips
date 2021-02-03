@@ -2,14 +2,14 @@
     <el-card shadow="hover" class="card">
         <div class="title-wrapper f-cb">
             <span><i class="el-icon-video-camera"></i></span> 
-            <div class="title">xxx</div>
+            <div class="title">{{project_name}}</div>
         </div>
         <div class="image-wrapper" @click="isclick">
             <img src="?imageView&amp;thumbnail=210y110"> 
             <span class="duration">00:03</span> 
         </div>
         <div class="ft">
-            <span class="time">2021-01-25</span> 
+            <span class="time">{{create_at}}</span> 
             <el-popconfirm title="确定删除此视频？">
                 <el-button plain icon="el-icon-delete" circle class="remove" size="mini" slot="reference"></el-button>
             </el-popconfirm>
@@ -18,9 +18,17 @@
 </template>
 <script>
     export default {
+        props:{
+            create_at:String,
+            project_name:String,
+            url:String
+        },
         methods:{
             isclick(){
-                this.$router.push({name:'play'})
+                this.$router.push({
+                    name:'play',
+                    params:{url:this.url}
+                })
             }
         }
     }

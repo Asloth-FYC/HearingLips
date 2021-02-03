@@ -2,8 +2,9 @@
 <!--  <input type="text" v-model='time' @input="toParent"></input>-->
   <div class="block">
     <el-timeline>
-      <el-timeline-item v-for="sentence in sentences"
+      <el-timeline-item v-for="(sentence,index) in sentences"
                         :timestamp="sentence.showTime"
+                        :key="index"
                         placement="top">
         <div @click="chooseTime(sentence.stime)" class="sentence">
           <el-card >

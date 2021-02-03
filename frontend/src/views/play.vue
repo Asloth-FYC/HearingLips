@@ -5,7 +5,7 @@
         </div>
         <div class="play">
             <div class="playvideos">
-                <video ref='myvideo' src="../assets/img/video.mp4" controls="controls" width="560px" height="378px" >
+                <video ref='myvideo' :src="url" controls="controls" width="560px" height="378px" >
                     your browser does not support the video tag
                 </video>
             </div>
@@ -30,8 +30,13 @@
       data(){
         return{
           time: '',
-          activeName:'first'
+          activeName:'first',
+          url:''
         }
+      },
+      created(){
+        this.url = this.$route.params.url;
+        console.log(this.url);
       },
       watch:{
         time:function (){

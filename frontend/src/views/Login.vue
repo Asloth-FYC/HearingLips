@@ -132,7 +132,7 @@ export default {
             type: 'success'
           });
           localStorage.setItem('Authorization',data.token);
-          this.$router.push({name:'home',params:{id:data.id}});
+          this.$router.push({name:'home'});
         }else{
           this.$notify({
             title: '错误',

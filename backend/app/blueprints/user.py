@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, json
 from app.extensions import db
 from app.models import User
-from app.utils.token import generate_auth_token, verify_auth_token
+from app.utils import generate_auth_token, verify_auth_token, class_to_dict
 
 user_bp = Blueprint('user', __name__)
 
@@ -47,5 +47,8 @@ def get():
         return jsonify(code=401, msg='登录过期，请重新登录！')
     user_id = data['user_code']
     user = User.query.get(user_id)
-
-    return jsonify(code=200, data={'username':user.username}, msg='验证通过')
+    projects = user.projects
+    return jsonify(code=200,
+                   usermsg={'username':user.username},
+                   projects=class_to_dict(projects),
+                   msg='验证通过')

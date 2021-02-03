@@ -39,7 +39,7 @@
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                 </el-upload>
-                <el-button class="submit" type="primary" plain icon="el-icon-check" circle @click="submitUpload('ruleForm')"></el-button>
+                <el-button class="submit" type="primary" plain icon="el-icon-check" @click="submitUpload('ruleForm')"></el-button>
                 </div>
             </el-form>
         </div>
@@ -93,7 +93,8 @@ export default {
       return {
         postPrams:{
           name: '',
-          type: ''
+          type: '',
+          token:localStorage.getItem('Authorization')
         },
         fileList:[],
         activeStep:0,
