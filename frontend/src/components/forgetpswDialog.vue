@@ -59,7 +59,7 @@ export default {
   methods:{
     onPasswordInput(val) {
       if (this.form.inputPassword !== this.form.confirmPassword) {
-        this.errorText = '该项不能为空';
+        this.errorText = '两次密码不一致';
       } else {
         this.errorText = '';
       }

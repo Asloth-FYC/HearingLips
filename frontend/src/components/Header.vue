@@ -13,6 +13,9 @@
                     <strong style="display:block;">{{this.$cookies.get('user')}}<i class="el-icon-edit"></i></strong>
                 </el-dropdown-item>
                 </router-link>
+                <el-dropdown-item divided @click.native="change">
+                    修改密码
+                </el-dropdown-item>
             <router-link to="/">
                 <el-dropdown-item divided>项目介绍</el-dropdown-item>
             </router-link>
@@ -24,6 +27,7 @@
             </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
+        <ChangeData ref="ChangeData"></ChangeData>
     </div>
 </div>
     
@@ -42,6 +46,7 @@ a {
 </style>
 
 <script>
+    import ChangeData from "./ChangeData";
 export default {
     name:'Header',
     props:{
@@ -53,7 +58,12 @@ export default {
                 this.$cookies.remove('user')
             }
             this.$router.push({name:'login'})
+        },
+        change(){
+            this.$refs.ChangeData.onShow();
         }
     },
+    components:{ChangeData
+    }
 }
 </script>
