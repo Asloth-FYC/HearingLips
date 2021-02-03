@@ -5,32 +5,52 @@
         </div>
         <div class="play">
             <div class="playvideos">
-                <video src="../assets/img/video.mp4" controls="controls" width="560px" height="378px" >
+                <video ref='myvideo' src="../assets/img/video.mp4" controls="controls" width="560px" height="378px" >
                     your browser does not support the video tag
                 </video>
             </div>
             <div class="fun">
-                <div class="header2">
-                    <el-button >功能一</el-button>
-                    <el-button >功能二</el-button>
-                    <el-button >功能三</el-button>
-                </div>
-                <div class="fenjie" >
-
-                </div>
-                <div class="body2">
-                    <img src="https://jianwai.youdao.com/assets/img/no-card.20208f4.png" alt="无法显示图片" class="pimg">
-                </div>
-    </div>
-    </div>
+                  <el-tabs v-model="activeName" type="card" class="tab">
+                    <el-tab-pane label="编辑字幕" name="first">
+                      <subtitle @settime="settime"></subtitle>
+                    </el-tab-pane>
+                    <el-tab-pane label="功能二" name="second">配置管理</el-tab-pane>
+                    <el-tab-pane label="功能三" name="third">角色管理</el-tab-pane>
+                  </el-tabs>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    export default {}
+
+    import Subtitle from "@/components/subtitle";
+    export default {
+      components: {Subtitle},
+      data(){
+        return{
+          time: '',
+          activeName:'first'
+        }
+      },
+      watch:{
+        time:function (){
+          console.log(this.time)
+          this.$refs.myvideo.currentTime=this.time
+        }
+      },
+      methods: {
+        settime(time){
+          this.time=time
+        },
+      }
+    }
 </script>
 
 <style>
+.tab{
+  background-color: white;
+}
     video{
         outline: none
     }
@@ -40,7 +60,7 @@
 }
     .play{
         padding-top:40px ;
-        background-color: rgb(246,246,246);
+        /*background-color: rgb(246,246,246);*/
     }
     .playvideos{
         margin:  0 40px 0 40px;
