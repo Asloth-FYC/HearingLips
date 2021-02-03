@@ -3,11 +3,13 @@
   <div class="block">
     <el-timeline>
       <el-timeline-item v-for="sentence in sentences"
-                        :timestamp="sentence.stime"
+                        :timestamp="sentence.showTime"
                         placement="top">
         <div @click="chooseTime(sentence.stime)" class="sentence">
           <el-card >
-            <p>{{sentence.msg}}</p>
+            <el-input type="textarea"
+                      autosize
+                      v-model="sentence.msg"></el-input>
           </el-card>
         </div>
       </el-timeline-item>
@@ -23,10 +25,10 @@ export default {
     return{
       time:'',
       sentences:[
-        {stime:'0',msg:'录屏开始'},
-        {stime:'1',msg:'xxxxxxxxxxx'},
-        {stime:'3',msg:'yyyyyyyyyyyyyyyy'},
-        {stime:'4',msg:'yyyyyyyyyyyyyyyy'}
+        {stime:'0',showTime:'00:00',msg:'录屏开始'},
+        {stime:'1',showTime:'00:01',msg:'xxxxxxxxxxx'},
+        {stime:'3',showTime:'00:03',msg:'yyyyyyyyyyyyyyyy'},
+        {stime:'4',showTime:'00:04',msg:'yyyyyyyyyyyyyyyy'}
       ]
     }
   },
@@ -48,6 +50,10 @@ export default {
 </script>
 
 <style scoped>
+el-input{
+  border:0px;
+  outline:none;
+}
 .sentence{
   display: block;
 }
