@@ -25,10 +25,10 @@ export default {
     return{
       time:'',
       sentences:[
-        {stime:'0',showTime:'00:00',msg:'录屏开始'},
-        {stime:'1',showTime:'00:01',msg:'xxxxxxxxxxx'},
-        {stime:'3',showTime:'00:03',msg:'yyyyyyyyyyyyyyyy'},
-        {stime:'4',showTime:'00:04',msg:'yyyyyyyyyyyyyyyy'}
+        {stime:'0',showTime:'00:00-00：01',msg:'录屏开始'},
+        {stime:'1',showTime:'00:01-00：02',msg:'xxxxxxxxxxx'},
+        {stime:'3',showTime:'00:03-00：04',msg:'yyyyyyyyyyyyyyyy'},
+        {stime:'5',showTime:'00:05-00：06',msg:'yyyyyyyyyyyyyyyy'}
       ]
     }
   },
