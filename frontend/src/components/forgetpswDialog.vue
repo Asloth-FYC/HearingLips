@@ -26,11 +26,11 @@
       </el-form-item>
       <el-form-item label="密码" prop="inputPassword" :error="errorText">
         <el-input placeholder="请输入新密码" type="password"
-                  v-model="form.inputPassword"></el-input>
+                  v-model="form.inputPassword" ></el-input>
       </el-form-item>
       <el-form-item label="确认" prop="confirmPassword" :error="errorText">
         <el-input placeholder="请再次输入密码" type="password"
-                  v-model="form.confirmPassword"></el-input>
+                  v-model="form.confirmPassword" @input="onPasswordInput"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -59,6 +59,13 @@ export default {
     }
   },
   methods:{
+    onPasswordInput() {
+      if (this.form.inputPassword !== this.form.confirmPassword) {
+        this.errorText = '两次密码不一致';
+      } else {
+        this.errorText = '';
+      }
+    },
     onConfirm() {
       this.$refs.form.validate(valid => {
         if (valid) {
