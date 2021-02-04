@@ -35,6 +35,7 @@
                     action="http://localhost:5000/upload"
                     :on-success="handleSuccess"
                     :on-error="handleError"
+                    :before-upload="beforeUpload"
                     multiple>
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -133,6 +134,19 @@ export default {
             message:'文件上传失败，请稍后再试',
             type: 'error'
           });
+        },
+        beforeUpload(file) {
+            const fileSuffix = file.name.substring(file.name.lastIndexOf('.')+1)
+
+            const whiteList = ["mp4", "mov", "m4v"];
+
+            if (whiteList.indexOf(fileSuffix) === -1) {
+                this.$message({
+                    message: '上传文件只能是 mp4、mov、m4v格式!',
+                    type: 'warning'
+                });
+                return false;
+            }
         }
     }
 }
