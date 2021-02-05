@@ -66,6 +66,20 @@ def forgot():
     email = post_data['email']
     psw = post_data['newpsw']
     user = User.query.filter(User.email == email).first()
-    user.password = psw;
+    user.password = psw
     db.session.commit()
     return jsonify(code=200, msg='新密码设置成功！')
+
+
+@user_bp.route('/updatePsw', methods=['POST'])
+def updatePsw():
+    token = request.headers.get('token')
+    data = verify_auth_token(token)
+    user_id = data['user_code']
+    user = User.query.get(user_id)
+    post_data = json.loads(request.get_data(as_text=True))
+    if post_data['oldPsw'] != user.password:
+        return jsonify(code=400, msg='密码错误！')
+    user.password = post_data['psw']
+    db.session.commit()
+    return jsonify(code=200, msg='新密码设置成功，请重新登录！')

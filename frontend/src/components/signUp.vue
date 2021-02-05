@@ -76,7 +76,7 @@ export default {
             this.btnText1 = this.ts + 's'+'重发';
           }
         }, 1000)
-        apiAdminMail({email: this.form.email}).then((resp) => {
+        apiAdminMail({email: this.form.email,type:1}).then((resp) => {
             let data = resp.data;
             console.log(data.code);
             if(data.code==200){

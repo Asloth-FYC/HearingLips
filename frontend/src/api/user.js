@@ -25,14 +25,13 @@ export function register(postParams){
         }
     })
 }
-export function updata(postParams){
+export function updatePsw(postParams){
     return service.request({
         method:'post',
-        url:'/updatapsw',
+        url:'/updatePsw',
         data:{
-            name:postParams.name,
-            oldepsw:postParams.psw_md5,
-            psw:postParams.psw_md5
+            oldPsw:md5(postParams.inputOpassword),
+            psw:md5(postParams.inputpassword),
         }
     })
 }

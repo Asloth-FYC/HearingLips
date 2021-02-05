@@ -6,7 +6,8 @@ export function apiAdminMail(params){
         method:'post',
         url:'/captcha',
         data:{
-            email: params.email
+            email: params.email,
+            type : params.type
         }
     })
 }

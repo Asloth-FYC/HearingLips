@@ -49,7 +49,6 @@
 
 <script>
 import {login,register} from '@/api/user'
-import md5 from 'js-md5'
 import forgetpswDialog from "@/components/forgetpswDialog";
 import signUp from "@/components/signUp";
 
