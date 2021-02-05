@@ -28,3 +28,14 @@ export function get(){
         url:'/get',
     })
 }
+
+export function apiAdminSignUPMail(params){
+    return service.request({
+        method:'post',
+        url:'/admin/forget/mail',
+        data:{
+            username: params.username,
+            email: params.email
+        }
+    })
+}

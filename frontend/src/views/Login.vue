@@ -18,38 +18,35 @@
 
         <div class="user_options-forms" id="user_options-forms">
           <div class="user_forms-login">
-            <h2 class="forms_title">Sign in</h2>
-              <fieldset class="forms_fieldset">
-                <div class="forms_field">
-                  <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required autofocus />
-                </div>
-                <div class="forms_field">
-                  <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />
-                </div>
-              </fieldset>
+            <h2 class="forms_SItitle">Sign in</h2>
+<!--              <fieldset class="forms_fieldset">-->
+<!--                <div class="forms_field">-->
+<!--                  <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required autofocus />-->
+<!--                </div>-->
+<!--                <div class="forms_field">-->
+<!--                  <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />-->
+<!--                </div>-->
+<!--              </fieldset>-->
+            <el-form :model="postParams" ref="form" size="medium" :rules="rules" class="forms_fieldset" >
+              <el-form-item  prop="email" class="forms_field">
+                <el-input placeholder="请输入邮箱地址" v-model="postParams.email"
+                          oninput="value=value.replace(/[^\dA-Za-z@.]/g,'')"></el-input>
+              </el-form-item>
+              <el-form-item  prop="psw_md5"  class="forms_field">
+                <el-input placeholder="请输入密码" type="password"
+                          v-model="postParams.psw_md5" ></el-input>
+              </el-form-item>
+            </el-form>
               <div class="forms_buttons">
                 <button type="button" class="forms_buttons-forgot" @click="forgetpsw">Forgot password?</button>
-              <button class="forms_buttons-action" @click="sign_in">Sign In</button>
+              <button class="forms_buttons-action" @click="sign_in('form')">Sign In</button>
               </div>
           </div>
           <div class="user_forms-signup">
-            <h2 class="forms_title">Sign Up</h2>
-              <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="forms_fieldset">
-                <el-form-item class="forms_field">
-                  <input type="text" v-model="postParams.name" placeholder="Username" class="forms_field-input" required />
-                </el-form-item>
-                <el-form-item class="forms_field">
-                  <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required />
-                </el-form-item>
-                <el-form-item class="forms_field" prop="psw">
-                  <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />
-                </el-form-item>
-                <el-form-item class="forms_field" prop="psw_check">
-                  <input type="password" v-model="ruleForm.psw_check" placeholder="Check Password" class="forms_field-input" required />
-                </el-form-item>
-              </el-form>
+            <h2 class="forms_SUtitle">Sign Up</h2>
+              <sign-up @uploadForm="uploadForm"></sign-up>
               <div class="forms_buttons">
-                <button class="forms_buttons-action" @click="sign_up('ruleForm')">Sign up</button>
+                <button class="forms_buttons-action" @click="sign_up">Sign up</button>
               </div>
           </div>
         </div>
@@ -63,53 +60,54 @@
 import {login,register} from '@/api/user'
 import md5 from 'js-md5'
 import forgetpswDialog from "@/components/forgetpswDialog";
+import signUp from "@/components/signUp";
+
+const emptyText="不能为空";
 
 export default {
   name: 'login',
   components:{
-    forgetpswDialog
+    forgetpswDialog,
+    signUp
   },
   data(){
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'));
-      } else {
-        if (this.ruleForm.psw_check !== '') {
-          this.$refs.ruleForm.validateField('psw_check');
-        }
-        callback();
-      }
+    var emptyValid = msg => {
+      return {required: true, message: msg + emptyText, trigger: "blur"};
     };
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value !== this.ruleForm.psw) {
-        callback(new Error('两次输入密码不一致!'));
-      } else {
-        callback();
+    var validateEmail = (rule, value, callback) => {
+      if (value) {
+        let reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        if (!reg.test(value)) {
+          callback(new Error("邮箱地址不合法！"));
+        }
       }
+      callback();
     };
     return{
-      postParams:{
-        name:'',
-        email:'',
-        psw_md5:''
-      },
-      ruleForm:{
-        psw:'',
-        psw_check:''
-      },
-      rules: {
-        psw: [
-          { validator: validatePass, trigger: 'blur' }
-        ],
-        psw_check: [
-          { validator: validatePass2, trigger: 'blur' }
-        ]
+        postParams:{
+          name:'',
+          email:'',
+          psw_md5:''
+        },
+        ruleForm:{
+          psw:'',
+          psw_check:'',
+          SUvalid:''//从signup子组件传回的表单校验值
+        },
+      rules :{
+        psw_md5: [emptyValid("密码")],
+        email: [emptyValid("邮箱"), {validator: validateEmail, trigger: 'blur'}],
       }
     };
   },
   methods:{
+    uploadForm(form){
+      this.postParams.name=form.username
+      this.postParams.email=form.email
+      this.ruleForm.psw=form.inputPassword
+      this.ruleForm.psw_check=form.confirmPassword
+      this.SUvalid=form.valid
+    },
     choose_signup(){
       this.psw=''
       const userForms = document.getElementById('user_options-forms')
@@ -121,30 +119,36 @@ export default {
       userForms.classList.remove('bounceLeft')
       userForms.classList.add('bounceRight')
     },
-    sign_in(){
-      this.postParams.psw_md5 = md5(this.ruleForm.psw)
-      login(this.postParams).then(resp => {
-        let data = resp.data;
-        if(data.code==200){
-          this.$notify({
-            title: data.msg,
-            message: 'Welcome!  '+data.name,
-            type: 'success'
-          });
-          localStorage.setItem('Authorization',data.token);
-          this.$router.push({name:'home'});
-        }else{
-          this.$notify({
-            title: '错误',
-            message: data.msg,
-            type: 'error'
-          });
+    sign_in(formName){
+      this.$refs[formName].validate((valid) => {
+        if (valid){
+          // this.postParams.psw_md5 = md5(this.ruleForm.psw)
+          login(this.postParams).then(resp => {
+            let data = resp.data;
+            if (data.code == 200) {
+              this.$notify({
+                title: data.msg,
+                message: 'Welcome!  ' + data.name,
+                type: 'success'
+              });
+              localStorage.setItem('Authorization', data.token);
+              this.$router.push({name: 'home'});
+            } else {
+              this.$notify({
+                title: '错误',
+                message: data.msg,
+                type: 'error'
+              });
+            }
+          })
+        } else {
+          console.log('error submit!!');
+          return false;
         }
       })
     },
-    sign_up(formName){
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
+    sign_up(){
+        if (this.SUvalid) {
           this.postParams.psw_md5 = md5(this.ruleForm.psw)
           register(this.postParams).then(resp => {
             let data = resp.data;
@@ -167,7 +171,6 @@ export default {
           console.log('error submit!!');
           return false;
         }
-      });
     },
     forgetpsw(){
       this.$refs.forgetPasswordDialog.onShow();

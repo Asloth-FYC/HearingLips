@@ -16,7 +16,7 @@
                   oninput="value=value.replace(/[^\dA-Za-z@.]/g,'')"></el-input>
       </el-form-item>
       <el-form-item label="验证码" prop="code">
-        <div class="flex align-center">
+        <div class="code">
           <el-input placeholder="请输入验证码" v-model="form.code"
                     class="margin-right-xs"
                     oninput="value=value.replace(/[^\d]/g,'')"></el-input>
@@ -30,7 +30,7 @@
       </el-form-item>
       <el-form-item label="确认" prop="confirmPassword" :error="errorText">
         <el-input placeholder="请再次输入密码" type="password"
-                  v-model="form.confirmPassword" @input="onPasswordInput"></el-input>
+                  v-model="form.confirmPassword"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -135,4 +135,11 @@ const rules = {
 </script>
 
 <style scoped>
+.code{
+  display: flex;
+  align-items: center;
+}
+.margin-right-xs{
+  margin-right: 10px;
+}
 </style>

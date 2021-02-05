@@ -164,7 +164,8 @@ input
   left: 30px
 
   width: calc(50% - 30px)
-  min-height: 420px
+  //height: auto
+  min-height: 480px
   background-color: $white
   border-radius: $bdrds
   box-shadow: 2px 0 15px rgba($black, .25)
@@ -177,9 +178,18 @@ input
     transition: opacity .4s ease-in-out, visibility .4s ease-in-out
 
   .forms
-    &_title
-      margin-bottom: 45px
+    &_SUtitle
+      margin-bottom: 30px
 
+      font-size: 1.5rem
+      font-weight: $ff-medium
+      line-height: 1em
+      text-transform: uppercase
+      color: $salmon
+      letter-spacing: .1rem
+
+    &_SItitle
+      margin-bottom: 45px
 
       font-size: 1.5rem
       font-weight: $ff-medium
