@@ -1,4 +1,5 @@
 import service from './httpAPI';
+import md5 from 'js-md5'
 
 export function login(postParams){
     return service.request({
@@ -6,7 +7,7 @@ export function login(postParams){
         url:'/login',
         data:{
             email:postParams.email,
-            psw:postParams.psw_md5
+            psw:md5(postParams.psw)
         }
     })
 }
@@ -19,7 +20,8 @@ export function register(postParams){
         data:{
             name:postParams.name,
             email:postParams.email,
-            psw:postParams.psw_md5
+            psw:md5(postParams.psw),
+            captcha:postParams.captcha
         }
     })
 }

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, json
+from flask import Blueprint, request, jsonify, json, session
 from app.extensions import db
 from app.models import User
 from app.utils import generate_auth_token, verify_auth_token, class_to_dict
@@ -9,6 +9,9 @@ user_bp = Blueprint('user', __name__)
 @user_bp.route('/regi', methods=['POST', 'GET'])
 def register():
     post_data = json.loads(request.get_data(as_text=True))
+    submit = post_data['captcha']
+    if submit != session['captcha']:
+        return jsonify(code=400, msg='验证码错误！')
     name = post_data['name']
     email = post_data['email']
     psw = post_data['psw']
@@ -52,3 +55,17 @@ def get():
                    usermsg={'username':user.username},
                    projects=class_to_dict(projects),
                    msg='验证通过')
+
+
+@user_bp.route('/forgot', methods=['POST'])
+def forgot():
+    post_data = json.loads(request.get_data(as_text=True))
+    submit = post_data['captcha']
+    if submit != session['captcha']:
+        return jsonify(code=400, msg='验证码错误！')
+    email = post_data['email']
+    psw = post_data['newpsw']
+    user = User.query.filter(User.email == email).first()
+    user.password = psw;
+    db.session.commit()
+    return jsonify(code=200, msg='新密码设置成功！')

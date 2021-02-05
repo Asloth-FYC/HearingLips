@@ -1,16 +1,12 @@
 <template>
   <el-dialog
-      title="忘记密码"
+      title="找回密码"
       :visible.sync="dialogVisible"
       :lock-scroll="false"
       width="800px"
       ref="forgetpswDialog"
       center>
     <el-form :model="form" ref="form" size="medium" label-width="80px" :rules="rules">
-      <el-form-item label="用户名" prop="username">
-        <el-input placeholder="请输入用户名" v-model="form.username"
-                  oninput="value=value.replace(/[^\dA-Za-z@.]/g,'')"></el-input>
-      </el-form-item>
       <el-form-item label="邮箱" prop="email">
         <el-input placeholder="请输入邮箱地址" v-model="form.email"
                   oninput="value=value.replace(/[^\dA-Za-z@.]/g,'')"></el-input>
@@ -18,10 +14,8 @@
       <el-form-item label="验证码" prop="code">
         <div class="code">
           <el-input placeholder="请输入验证码" v-model="form.code"
-                    class="margin-right-xs"
-                    oninput="value=value.replace(/[^\d]/g,'')"></el-input>
-          <el-button type="primary" @click="onSendCode" size="mini" :disabled="disabled">{{btnText1}}
-          </el-button>
+                    class="margin-right-xs"></el-input>
+          <el-button type="primary" @click="onSendCode" size="mini" :disabled="disabled">{{btnText1}}</el-button>
         </div>
       </el-form-item>
       <el-form-item label="密码" prop="inputPassword" :error="errorText">
@@ -42,8 +36,7 @@
 
 <script>
 import dialogmixin from "@/assets/js/dialogMixin";
-import { apiAdminForgetMail, apiAdminForgetPassword} from "@/api/admin";
-import md5 from 'js-md5'
+import {apiAdminMail,apiAdminForgotPassword} from "@/api/admin";
 
 export default {
   mixins: [dialogmixin],
@@ -75,16 +68,28 @@ export default {
           } else {
             this.errorText = '';
           }
-          this.$set(this.form, 'password', md5(this.form.username + this.form.inputPassword))
-          apiAdminForgetPassword(this.form).then(() => {
-            this.onCancel();
+          apiAdminForgotPassword(this.form).then((resp) => {
+            let data = resp.data;
+            if(data.code==200){
+              this.$notify({
+                title: '成功',
+                message: data.msg,
+                type: 'success'
+              });
+            }else{
+              this.$notify({
+                title: '错误',
+                message: data.msg,
+                type: 'error'
+              });
+            }
           })
         }
       })
     },
     //发送验证码
     onSendCode() {
-      if (this.form.username && this.form.email) {
+      if (this.form.email) {
         this.disabled = true;
         let interval = setInterval(() => {
           this.ts -= 1;
@@ -97,8 +102,21 @@ export default {
             this.btnText1 = this.ts + 's'+'重发';
           }
         }, 1000)
-        apiAdminForgetMail({username: this.form.username, email: this.form.email}).then(() => {
-
+        apiAdminMail({email: this.form.email}).then((resp) => {
+            let data = resp.data;
+            if(data.code==200){
+              this.$notify({
+                title: '成功',
+                message: data.msg,
+                type: 'success'
+              });
+            }else{
+              this.$notify({
+                title: '错误',
+                message: data.msg,
+                type: 'error'
+              });
+            }
         }).catch(()=>{
           clearInterval(interval)
           this.btnText = '发送验证码';
@@ -127,7 +145,6 @@ var validateEmail = (rule, value, callback) => {
 };
 const rules = {
   code: [emptyValid("验证码")],
-  username: [emptyValid("用户名")],
   inputPassword: [emptyValid("密码")],
   confirmPassword: [emptyValid("确认密码")],
   email: [emptyValid("邮箱"), {validator: validateEmail, trigger: 'blur'}],

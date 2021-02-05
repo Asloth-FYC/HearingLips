@@ -12,18 +12,17 @@
     <el-form-item  prop="code" class="forms_field">
       <div class="code">
         <el-input placeholder="请输入验证码" v-model="form.code"
-                  class="margin-right-xs"
-                  oninput="value=value.replace(/[^\d]/g,'')"></el-input>
+                  class="margin-right-xs"></el-input>
         <el-button  @click="onSendCode" size="mini" :disabled="disabled">{{btnText1}}
         </el-button>
       </div>
     </el-form-item>
     <el-form-item  prop="inputPassword" :error="errorText" class="forms_field">
-      <el-input placeholder="请输入新密码" type="password"
+      <el-input placeholder="设置密码" type="password"
                 v-model="form.inputPassword" ></el-input>
     </el-form-item>
     <el-form-item  prop="confirmPassword" :error="errorText" class="forms_field">
-      <el-input placeholder="请再次输入密码" type="password"
+      <el-input placeholder="确认密码" type="password"
                 v-model="form.confirmPassword" @input="onPasswordInput"></el-input>
     </el-form-item>
   </el-form>
@@ -31,7 +30,7 @@
 </template>
 
 <script>
-import {apiAdminSignUPMail} from "@/api/admin"
+import {apiAdminMail} from "@/api/admin"
 
 export default {
   name: "signUp",
@@ -77,8 +76,22 @@ export default {
             this.btnText1 = this.ts + 's'+'重发';
           }
         }, 1000)
-        apiAdminSignUPMail({username: this.form.username, email: this.form.email}).then(() => {
-
+        apiAdminMail({email: this.form.email}).then((resp) => {
+            let data = resp.data;
+            console.log(data.code);
+            if(data.code==200){
+              this.$notify({
+                title: '成功',
+                message: data.msg,
+                type: 'success'
+              });
+            }else{
+              this.$notify({
+                title: '错误',
+                message: data.msg,
+                type: 'error'
+              });
+            }
         }).catch(()=>{
           clearInterval(interval)
           this.btnText = '发送验证码';

@@ -1,8 +1,10 @@
 import os
 from flask import Flask
+
+from app.blueprints.email import email_bp
 from app.blueprints.project import project_bp
 from app.blueprints.user import user_bp
-from app.extensions import db, migrate, cors
+from app.extensions import db, migrate, cors, mail
 from app.settings import config
 
 
@@ -28,8 +30,10 @@ def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app,db)
     cors.init_app(app)
+    mail.init_app(app)
 
 
 def register_blueprints(app):
     app.register_blueprint(user_bp)
     app.register_blueprint(project_bp)
+    app.register_blueprint(email_bp)

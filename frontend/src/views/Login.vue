@@ -19,27 +19,18 @@
         <div class="user_options-forms" id="user_options-forms">
           <div class="user_forms-login">
             <h2 class="forms_SItitle">Sign in</h2>
-<!--              <fieldset class="forms_fieldset">-->
-<!--                <div class="forms_field">-->
-<!--                  <input type="email" v-model="postParams.email" placeholder="Email" class="forms_field-input" required autofocus />-->
-<!--                </div>-->
-<!--                <div class="forms_field">-->
-<!--                  <input type="password" v-model="ruleForm.psw" placeholder="Password" class="forms_field-input" required />-->
-<!--                </div>-->
-<!--              </fieldset>-->
-            <el-form :model="postParams" ref="form" size="medium" :rules="rules" class="forms_fieldset" >
+            <el-form :model="form" ref="Aform" size="medium" :rules="rules" class="forms_fieldset" >
               <el-form-item  prop="email" class="forms_field">
-                <el-input placeholder="请输入邮箱地址" v-model="postParams.email"
+                <el-input placeholder="请输入邮箱地址" v-model="form.email"
                           oninput="value=value.replace(/[^\dA-Za-z@.]/g,'')"></el-input>
               </el-form-item>
-              <el-form-item  prop="psw_md5"  class="forms_field">
-                <el-input placeholder="请输入密码" type="password"
-                          v-model="postParams.psw_md5" ></el-input>
+              <el-form-item  prop="psw"  class="forms_field">
+                <el-input placeholder="请输入密码" type="password" v-model="form.psw" ></el-input>
               </el-form-item>
             </el-form>
               <div class="forms_buttons">
                 <button type="button" class="forms_buttons-forgot" @click="forgetpsw">Forgot password?</button>
-              <button class="forms_buttons-action" @click="sign_in('form')">Sign In</button>
+              <button class="forms_buttons-action" @click="sign_in('Aform')">Sign In</button>
               </div>
           </div>
           <div class="user_forms-signup">
@@ -84,32 +75,31 @@ export default {
       callback();
     };
     return{
-        postParams:{
-          name:'',
-          email:'',
-          psw_md5:''
-        },
-        ruleForm:{
-          psw:'',
-          psw_check:'',
-          SUvalid:''//从signup子组件传回的表单校验值
-        },
+      form:{
+        name:'',
+        email:'',
+        psw:'',
+        captcha:''
+      },
+        psw_check:'',
+        SUvalid:'',//从signup子组件传回的表单校验值
       rules :{
-        psw_md5: [emptyValid("密码")],
+        psw: [emptyValid("密码")],
         email: [emptyValid("邮箱"), {validator: validateEmail, trigger: 'blur'}],
       }
     };
   },
   methods:{
     uploadForm(form){
-      this.postParams.name=form.username
-      this.postParams.email=form.email
-      this.ruleForm.psw=form.inputPassword
-      this.ruleForm.psw_check=form.confirmPassword
+      this.form.name=form.username
+      this.form.email=form.email
+      this.form.captcha=form.code
+      this.form.psw=form.inputPassword
+      this.psw_check=form.confirmPassword
       this.SUvalid=form.valid
     },
     choose_signup(){
-      this.psw=''
+      this.form.psw=''
       const userForms = document.getElementById('user_options-forms')
       userForms.classList.remove('bounceRight')
       userForms.classList.add('bounceLeft')
@@ -122,8 +112,7 @@ export default {
     sign_in(formName){
       this.$refs[formName].validate((valid) => {
         if (valid){
-          // this.postParams.psw_md5 = md5(this.ruleForm.psw)
-          login(this.postParams).then(resp => {
+          login(this.form).then(resp => {
             let data = resp.data;
             if (data.code == 200) {
               this.$notify({
@@ -149,8 +138,7 @@ export default {
     },
     sign_up(){
         if (this.SUvalid) {
-          this.postParams.psw_md5 = md5(this.ruleForm.psw)
-          register(this.postParams).then(resp => {
+          register(this.form).then(resp => {
             let data = resp.data;
             if(data.code==200){
               this.$notify({

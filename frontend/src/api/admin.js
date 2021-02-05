@@ -1,23 +1,24 @@
 import service from './httpAPI';
+import md5 from 'js-md5'
 
-export function apiAdminForgetMail(params){
+export function apiAdminMail(params){
     return service.request({
         method:'post',
-        url:'/admin/forget/mail',
+        url:'/captcha',
         data:{
-            username: params.username,
             email: params.email
         }
     })
 }
 
-export function apiAdminForgetPassword(data){
+export function apiAdminForgotPassword(data){
     return service.request({
         method:'post',
-        url:'/admin/forget/password',
+        url:'/forgot',
         data:{
-            username: data.username,
-            email: data.email
+            email: data.email,
+            newpsw: md5(data.inputPassword),
+            captcha: data.code
         }
     })
 }
@@ -29,13 +30,3 @@ export function get(){
     })
 }
 
-export function apiAdminSignUPMail(params){
-    return service.request({
-        method:'post',
-        url:'/admin/forget/mail',
-        data:{
-            username: params.username,
-            email: params.email
-        }
-    })
-}
