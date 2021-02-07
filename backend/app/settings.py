@@ -1,22 +1,28 @@
 import os
 
 # 项目根目录
+from dotenv import load_dotenv
+
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
+
+dotenv_path = os.path.join(os.getcwd(), '.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
 
 
 class BaseConfig(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY='LAAT4AM12'
-    MAIL_SERVER='smtp.qq.com'
-    MAIL_PORT=25
-    MAIL_USE_TLS=True
-    MAIL_PASSWORD='ocypqlqiodrcbafb'
-    MAIL_USERNAME='1154205999@qq.com'
-    MAIL_DEFAULT_SENDER='1154205999@qq.com'
+    SECRET_KEY=os.getenv('SECRET_KEY')
+    MAIL_SERVER=os.getenv('MAIL_SERVER')
+    MAIL_USE_TLS=os.getenv('MAIL_USE_TLS')
+    MAIL_PASSWORD=os.getenv('MAIL_PASSWORD')
+    MAIL_USERNAME=os.getenv('MAIL_USERNAME')
+    MAIL_DEFAULT_SENDER=os.getenv('MAIL_DEFAULT_SENDER')
 
 
 class DevelopmentConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:594666@localhost/flask_study'
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI_Dev')
 
 
 class TestingConfig(BaseConfig):
@@ -25,7 +31,7 @@ class TestingConfig(BaseConfig):
 
 
 class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:594666@127.0.0.1:3306/flask_study'
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI_Pro')
 
 
 config = {

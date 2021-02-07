@@ -6,7 +6,7 @@ from flask_mail import Message
 email_bp = Blueprint('email', __name__)
 
 
-@email_bp.route('/captcha', methods=['POST', 'GET'])
+@email_bp.route('/api/captcha', methods=['POST', 'GET'])
 def captcha():
     post_data = json.loads(request.get_data(as_text=True))
     email = post_data['email']

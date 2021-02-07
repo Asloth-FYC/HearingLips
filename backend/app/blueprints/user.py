@@ -6,7 +6,7 @@ from app.utils import generate_auth_token, verify_auth_token, class_to_dict
 user_bp = Blueprint('user', __name__)
 
 
-@user_bp.route('/regi', methods=['POST', 'GET'])
+@user_bp.route('/api/regi', methods=['POST', 'GET'])
 def register():
     post_data = json.loads(request.get_data(as_text=True))
     submit = post_data['captcha']
@@ -28,7 +28,7 @@ def register():
         return jsonify(code=200, msg='欢迎加入HearingLips！')
 
 
-@user_bp.route('/login', methods=['POST'])
+@user_bp.route('/api/login', methods=['POST'])
 def login():
     post_data = json.loads(request.get_data(as_text=True))
     email = post_data['email']
@@ -42,7 +42,7 @@ def login():
     return jsonify(code=400, msg='用户名或密码错误！')
 
 
-@user_bp.route('/get', methods=['POST'])
+@user_bp.route('/api/get', methods=['POST'])
 def get():
     token = request.headers.get('token')
     data = verify_auth_token(token)
@@ -52,12 +52,12 @@ def get():
     user = User.query.get(user_id)
     projects = user.projects
     return jsonify(code=200,
-                   usermsg={'username':user.username},
+                   usermsg={'username': user.username},
                    projects=class_to_dict(projects),
                    msg='验证通过')
 
 
-@user_bp.route('/forgot', methods=['POST'])
+@user_bp.route('/api/forgot', methods=['POST'])
 def forgot():
     post_data = json.loads(request.get_data(as_text=True))
     submit = post_data['captcha']
@@ -71,7 +71,7 @@ def forgot():
     return jsonify(code=200, msg='新密码设置成功！')
 
 
-@user_bp.route('/updatePsw', methods=['POST'])
+@user_bp.route('/api/updatePsw', methods=['POST'])
 def updatePsw():
     token = request.headers.get('token')
     data = verify_auth_token(token)

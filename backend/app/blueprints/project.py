@@ -9,7 +9,7 @@ from app.utils import verify_auth_token
 project_bp = Blueprint('project', __name__)
 
 
-@project_bp.route('/upload', methods=['POST', 'GET'])
+@project_bp.route('/api/upload', methods=['POST', 'GET'])
 def upload():
     formData = request.form.to_dict()
     token = formData.get('token')
