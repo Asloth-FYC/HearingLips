@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header/>
+        <Header :signed="true"/>
         <div class="step">
             <el-steps :active="activeStep" finish-status="success" simple style="margin-top: 20px">
                 <el-step title="提交视频" ></el-step>
@@ -32,7 +32,7 @@
                     :auto-upload="false"
                     list-type="picture"
                     :file-list="fileList"
-                    action="http://localhost:5000/upload"
+                    action="/api/upload"
                     :on-success="handleSuccess"
                     :on-error="handleError"
                     :before-upload="beforeUpload"

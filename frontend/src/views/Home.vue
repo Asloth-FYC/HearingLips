@@ -2,7 +2,7 @@
     <div>
         <el-container>
             <el-header height='40px'>
-                <Header :signed='signed' :username='username'/>
+                <Header :signed='this.signed' :username='this.username'/>
             </el-header>
             <el-main>
                 <Nav/>
@@ -49,9 +49,9 @@ export default {
     components: { Nav,Header,Footer,videoCard },
     data(){
         return{
+            projects:[],
             signed:false,
-            username:'',
-            projects:[]
+            username:''
         }
     },
     created(){
@@ -71,9 +71,6 @@ export default {
                 this.$router.push('/login');
             }
         })
-
-
     }
 }
-
 </script>
