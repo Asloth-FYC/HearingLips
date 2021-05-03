@@ -35,6 +35,7 @@ export default {
         console.log(key, keyPath);
       },
       start(){
+        console.log("ok");
         this.$router.push({name:'videoTrans'})
       }
     }

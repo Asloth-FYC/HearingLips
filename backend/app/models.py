@@ -16,4 +16,4 @@ class Project(db.Model):
     type = db.Column(db.String(10), nullable=False)
     url = db.Column(db.String(100), nullable=False)
     create_at = db.Column(db.String(40), default=str(datetime.date.today()))
-    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

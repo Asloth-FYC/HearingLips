@@ -6,7 +6,7 @@ module.exports = {
         port: 8080, // 端口号
         proxy: {
             '/api': {
-              target: 'http://localhost:8000',
+              target: 'http://localhost:5000',
               changeOrigin: true, //允许跨域
             }
           }

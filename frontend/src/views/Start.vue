@@ -24,7 +24,7 @@
                     </el-select>
                 </el-form-item>
                 <div class="uploadBox">
-                    <el-upload
+                  <el-upload
                     class="upload-demo"
                     ref="upload"
                     drag
@@ -37,8 +37,8 @@
                     :on-error="handleError"
                     :before-upload="beforeUpload"
                     multiple>
-                <i class="el-icon-upload"></i>
-                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                  <i class="el-icon-upload"></i>
+                  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                 </el-upload>
                 <el-button class="submit" type="primary" plain icon="el-icon-check" @click="submitUpload('ruleForm')"></el-button>
                 </div>
@@ -138,7 +138,7 @@ export default {
         beforeUpload(file) {
             const fileSuffix = file.name.substring(file.name.lastIndexOf('.')+1)
 
-            const whiteList = ["mp4", "mov", "m4v"];
+            const whiteList = ["mp4", "mov", "m4v", "avi"];
 
             if (whiteList.indexOf(fileSuffix) === -1) {
                 this.$message({

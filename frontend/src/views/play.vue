@@ -14,8 +14,8 @@
                     <el-tab-pane label="编辑字幕" name="first">
                       <subtitle @settime="settime"></subtitle>
                     </el-tab-pane>
-                    <el-tab-pane label="功能二" name="second">配置管理</el-tab-pane>
-                    <el-tab-pane label="功能三" name="third">角色管理</el-tab-pane>
+                    <!-- <el-tab-pane label="功能二" name="second">配置管理</el-tab-pane>
+                    <el-tab-pane label="功能三" name="third">角色管理</el-tab-pane> -->
                   </el-tabs>
             </div>
         </div>

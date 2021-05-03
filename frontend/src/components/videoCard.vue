@@ -5,8 +5,8 @@
             <div class="title">{{project_name}}</div>
         </div>
         <div class="image-wrapper" @click="isclick">
-            <img src="?imageView&amp;thumbnail=210y110"> 
-            <span class="duration">00:03</span> 
+            <img :src="getImageUrl"> 
+            <span class="duration">0.01</span> 
         </div>
         <div class="ft">
             <span class="time">{{create_at}}</span> 
@@ -21,7 +21,7 @@
         props:{
             create_at:String,
             project_name:String,
-            url:String
+            url:String,
         },
         methods:{
             isclick(){
@@ -29,9 +29,17 @@
                     name:'play',
                     params:{url:this.url}
                 })
+            },
+            
+        },
+        computed:{
+            getImageUrl: function(){
+                console.log(this.url + '.jpg');
+                return this.url + '.jpg'
             }
         }
     }
+    
 </script>
 <style scoped lang="scss">
 .card{
